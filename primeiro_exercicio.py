@@ -179,7 +179,7 @@ def nearest_value(a,K):
 
     print(lst[min(range(len(lst)), key=lambda i: abs(lst[i] - K))])
 
-def between_markers(a,b,c):  ##assert between_markers('What is >apple<', '>', '<') == "apple"
+def between_markers1(a,b,c):  ##assert between_markers('What is >apple<', '>', '<') == "apple"
     condition = False
     string = ""
     for i in a:
@@ -317,4 +317,187 @@ def first_word(a: str):
 
     return string
 
-first_word("Hello.World")
+def count_digits(a): # hi my name 1938 is 1839 and12io
+    list = []
+    auxiliar_string = ""
+    condicao = False
+    a += " "
+    strings_lowercase = ["a", "b", "c", "d", "'", "e", "f", "g", "h", "i", "j", "k", "l", "m",
+                         "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", ",", " ", "."]
+    strings_uppercase = []
+
+    for i in strings_lowercase:
+        strings_uppercase.append(i.upper())
+
+    strings_lowercase = strings_lowercase + strings_uppercase
+
+    for i in a:
+        if i in ["1","2","3","4","5","6","7","8","9","0"]:
+            condicao = True
+            auxiliar_string += i
+
+        elif condicao == True and i in strings_lowercase:
+            list.append(auxiliar_string)
+            auxiliar_string = ""
+            condicao = False
+
+    numero_digitos = 0
+
+    for i in range(len(list)):
+        for h in list[i]:
+            numero_digitos += 1
+
+    return numero_digitos
+
+def backward_string_by_word(a):
+    list = []
+    auxiliar_string =  ""
+    condicao = False
+    a += " "
+    strings_lowercase = ["a", "b", "c", "d", "'", "e", "f", "g", "h", "i", "j", "k", "l", "m",
+                         "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "á", "é", "í", "ó","ú"]
+    strings_uppercase = []
+
+    for i in strings_lowercase:
+        strings_uppercase.append(i.upper())
+
+    strings_lowercase = strings_lowercase + strings_uppercase
+
+
+    for i in a:
+
+        if i in strings_lowercase:
+            auxiliar_string += i
+
+        elif i == " ":
+
+            list.append(auxiliar_string)
+            auxiliar_string = ""
+            list.append(" ")
+
+        nova_string = ""
+        list2 = []
+
+        for i in list:
+            for char in reversed(i):
+                nova_string += char
+
+            list2.append(nova_string)
+            nova_string = ""
+
+        final_string = ""
+
+        for i in list2:
+            final_string += i
+
+    return final_string.strip()
+
+def bigger_price(a, b):
+    lista = []
+    lista2 = []
+
+    for i in b:
+        if "price" in i:
+            lista.append(i["price"])
+    lista.sort()
+    lista.reverse()
+
+    condicao = 0
+    condicao2 = a
+
+    while condicao != condicao2:
+        for i in b:
+            if i["price"] == lista[condicao]:
+                lista2.append(i)
+
+        condicao += 1
+
+    return lista2
+
+def between_markers(text: str, begin: str, end: str) -> str:
+    condition = False
+    str_first_verification = ""
+    str_second_verification = ""
+    final_string = ""
+    first_index = 0
+    second_index = 0
+
+    if len(begin) > 1 and len(end)>1:
+
+        for i in range(len(text)):
+            if text[i] == begin[0] and text[i+1] == begin[1]:
+
+                for h in range(i, len(text)):
+                    str_first_verification += text[h]
+                    if text[h] == begin[-1]:
+                        break
+
+        for i in range(len(text)):
+            if text[i] == end[0] and text[i+1] == end[1]:
+                for h in range(i, len(text)):
+                    str_second_verification += text[h]
+                    if text[h] == end[-1]:
+                        break
+                break
+
+        if str_first_verification == begin and str_second_verification == end: ##has begin and end
+            for i in range(len(text)):
+                if text[i] == begin[-1] and text[i-1] == begin[-2]:
+
+                    for h in range(i+1, len(text)):
+                        if text[h] == end[0] and text[h+1] == end[1]:
+                            break
+                        final_string += text[h]
+
+        elif str_first_verification == begin and str_second_verification != end: ## has begin but no end
+            for i in range(len(text)):
+                if text[i] == begin[-1] and text[i-1] == begin[-2]:
+                    for h in range(i+1, len(text)):
+                        final_string += text[h]
+
+        elif str_first_verification != begin and str_second_verification == end:
+            for i in range(len(text)):
+                if text[i] == end[0] and text[i+1] == end[1]:
+                    break
+
+                final_string += text[i]
+        elif str_first_verification != begin and str_second_verification != end:
+            return text
+
+    elif len(begin) == 1 and len(end) == 1:
+
+        for i in range(len(text)):
+            if text[i] == begin:
+                first_index = i
+
+            if text[i] == end:
+                second_index = i
+        if first_index < second_index:
+
+            for i in range(len(text)):
+                if text[i] == begin:
+                    for h in range(i+1, len(text)):
+                        if text[h] == end:
+                            break
+                        final_string += text[h]
+
+    return final_string
+
+assert between_markers('What is >apple<', '>', '<') == "apple", "One sym"
+assert between_markers("<head><title>My new site</title></head>",
+                           "<title>", "</title>") == "My new site"
+assert between_markers('No[/b] hi', '[b]', '[/b]') == 'No'
+assert between_markers('No [b]hi', '[b]', '[/b]') == 'hi'
+assert between_markers('No hi', '[b]', '[/b]') == 'No hi'
+assert between_markers('No <hi>', '>', '<') == ''
+print(between_markers("No <hi> one",">","<"))
+
+
+
+
+
+
+
+
+
+

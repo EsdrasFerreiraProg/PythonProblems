@@ -441,12 +441,10 @@ def find_exclusive(a: list) -> list:
             required_keys.append(key)
 
     for h in required_keys:
-        print(required_keys)
         for i in range(len(a)):
             if a[i] == h:
                 a.pop(i)
                 break
-
 
     if first_condition == True:
 

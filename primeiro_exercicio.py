@@ -479,6 +479,18 @@ def find_popularity(text: str, list: list) -> dict:
 
     return mydict
 
+def second_index(string: str, search: str):
+    condition = 0
+    if search == " " and " " not in string:
+        return None
+
+    for i in range(len(string)):
+
+        if string[i] == search and condition == 1:
+            return i
+        if string [i] == search:
+            condition += 1
+
 
 
 

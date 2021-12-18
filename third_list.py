@@ -1,3 +1,6 @@
+import json
+
+
 def insert_a_valid_note():
     while True:
         note = int(input("Type a note: "))
@@ -232,7 +235,7 @@ def accidents(listy_of_tuples: list):
     city_minor = ""
 
     for i in listy_of_tuples:
-        for key,value in i.items():
+        for key, value in i.items():
             if key == "code":
                 city = value
             if key == "number_of_accidents" and value < minor_index_of_accidents:
@@ -245,11 +248,84 @@ def accidents(listy_of_tuples: list):
             if key == "number_of_cars":
                 sum_for_mean_of_vehicles += value
 
-    return "MAJOR NUMBER OF CARS ACCIDENTS: " + str(major_index_of_accidents) + ", CITY OF MAJOR OCCURANCE: " + city_major + "\n" + "MINOR NUMBER OF CAR ACCIDENTS: " \
-            "" + str(minor_index_of_accidents) + "\n" + "MEAN OF CARS IN FIVE CITIES: " + str(sum_for_mean_of_vehicles/5)
+    return "MAJOR NUMBER OF CARS ACCIDENTS: " + str(
+        major_index_of_accidents) + ", CITY OF MAJOR OCCURANCE: " + city_major + "\n" + "MINOR NUMBER OF CAR ACCIDENTS: " \
+                                                                                        "" + str(
+        minor_index_of_accidents) + "\n" + "MEAN OF CARS IN FIVE CITIES: " + str(sum_for_mean_of_vehicles / 5)
 
-print(accidents([{"code": "SP", "number_of_cars": 5000, "number_of_accidents": 1125},
-           {"code": "RJ", "number_of_cars": 3521, "number_of_accidents": 6212},
-           {"code": "CG", "number_of_cars": 5000, "number_of_accidents": 5632},
-           {"code": "VI", "number_of_cars": 9857, "number_of_accidents": 3698},
-           {"code": "BH", "number_of_cars": 6546, "number_of_accidents": 1524}, ]))
+def minor_and_major_note(mydict: dict):
+    minor = 10000
+    major = 0
+    minor_pupil_name = ""
+    major_pupil_name = ""
+
+    for key,value in mydict.items():
+        if value < minor:
+            minor = value
+            minor_pupil_name = key
+        if value > major:
+            major = value
+            major_pupil_name = key
+
+    return "GREATEST PUPIL NOTE AND NAME: " + str(major) + ", " + major_pupil_name + "\n" + "WORST PUPIL NOTE AND NAME: " + str(minor) + ", " + minor_pupil_name
+
+def how_many_alumns(mydict):
+    counter = 0
+
+    for key in mydict.keys():
+        counter += 1
+    return counter
+
+def calculate_mean(mydict):
+    counter = 0
+    counter_of_how_many_values = 0
+    for value in mydict.values():
+        counter += value
+        counter_of_how_many_values += 1
+
+    return "MEAN: " + str(counter/counter_of_how_many_values)
+
+def print_templates(questions_answered: tuple, correct_answers: tuple):
+    import ast
+    mydict = {}
+
+    with open("dicts.txt", "r") as file:
+        a = file.readline()
+
+    if a != "":
+        with open("dicts.txt", "r") as read_file:
+            mydict = (read_file.read())
+            mydict = ast.literal_eval(mydict)
+
+    while True:
+        your_name = input("<0> BREAK PROGRAM\n"
+                          "<1> LIST MINOR AND MAJOR NOTE\n"
+                          "<2> COUNT HOW MANY STUDENTS HAVE ACESSED THE SOFTWARE\n"
+                          "<3> CALCULATE THE CLASS MEAN\n"
+                          "<DIGIT YOUR NAME> JUST TYPE YOUR NAME: ")
+        if your_name == "0":
+            break
+        elif your_name == "1":
+            print(minor_and_major_note(mydict))
+            break
+        elif your_name == "2":
+            print(how_many_alumns(mydict))
+            break
+        elif your_name == "3":
+            print(calculate_mean(mydict))
+            break
+
+        corrects = 0
+
+        for i in range(len(questions_answered)):
+            if questions_answered[i] == correct_answers[i]:
+                corrects += 1
+
+        mydict[your_name] = corrects
+
+        print(mydict)
+    with open("dicts.txt", "w") as file:
+        file.write(str(mydict))
+
+
+

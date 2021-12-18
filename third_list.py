@@ -1,11 +1,11 @@
-
 def insert_a_valid_note():
     while True:
         note = int(input("Type a note: "))
-        if note in [1,2,3,4,5,6,7,8,9,10,0]:
+        if note in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 0]:
             break
         else:
             print("Invalid value, keep trying")
+
 
 def verify_password_equal_to_name():
     while True:
@@ -16,11 +16,13 @@ def verify_password_equal_to_name():
         else:
             break
 
+
 def equal_population():
     number_of_first_population = 80000
     number_of_second_population = 200000
-    
-    while (number_of_first_population < number_of_second_population) and (number_of_first_population != number_of_second_population):
+
+    while (number_of_first_population < number_of_second_population) and (
+            number_of_first_population != number_of_second_population):
         print(number_of_first_population)
         number_of_first_population += number_of_first_population * 0.03
         number_of_second_population += number_of_second_population * 0.015
@@ -28,9 +30,11 @@ def equal_population():
     print(number_of_first_population)
     print(number_of_second_population)
 
+
 def print_1_20():
-    for i in range(0,21):
-        print(str(i), end = ' ')
+    for i in range(0, 21):
+        print(str(i), end=' ')
+
 
 def print_10():
     primeiro_valor = int(input("Digite o valor: "))
@@ -40,16 +44,19 @@ def print_10():
             primeiro_valor = valor
     print(primeiro_valor)
 
+
 def sum():
     valor = 0
     for i in range(10):
         valor += int(input("Digite o valor: "))
     print("Soma é igual a: " + str(valor))
-    print("Média é igual a: " + str(valor/10))
+    print("Média é igual a: " + str(valor / 10))
+
 
 def print_odd_numbers():
     for i in range(1, 51, 2):
         print(str(i))
+
 
 def print_integers():
     value1 = int(input("Type the first integer in interval: "))
@@ -62,23 +69,25 @@ def print_integers():
         for i in range(value2, value1, -1):
             print(str(i))
 
+
 def tab_generator():
     valor = input("De que número queres a tabuada? ")
     print("Tabuada do " + valor + ":")
 
-    for i in range(0,11):
+    for i in range(0, 11):
         print(str(valor) + " X " + str(i))
+
 
 def pow():
     valor = 1
     base = int(input("Digite a base: "))
     potencia = int(input("Digite a potência: "))
 
-
     for i in range(potencia):
         valor *= base
 
     return valor
+
 
 def amount_of_odds_and_even_numbers():
     even = 0
@@ -90,24 +99,27 @@ def amount_of_odds_and_even_numbers():
         elif number % 3 == 0:
             odd += 1
 
-    print("EVEN NUMBERS: " + str(even) + " ODD NUMBERS: "+ str(odd))
+    print("EVEN NUMBERS: " + str(even) + " ODD NUMBERS: " + str(odd))
+
 
 def fibonacci():
     index = int(input("TYPE N: "))
-    start_value = [0,1]
+    start_value = [0, 1]
     for i in range(index):
-        start_value.append(start_value[i +1] + start_value[i])
+        start_value.append(start_value[i + 1] + start_value[i])
 
     start_value.pop(0)
     start_value.pop(-1)
 
     return start_value
 
+
 def factorial(number):
     if number == 1:
         return number
     else:
-        return number*factorial(number-1)
+        return number * factorial(number - 1)
+
 
 def major_minor_and_sum():
     values = []
@@ -133,9 +145,10 @@ def major_minor_and_sum():
 
     return "Major = " + str(major) + "\n" + "Minor = " + str(minor) + "\n" + "SUM = " + str(sum)
 
+
 def determine_prime(number: int):
-    primes = [1,3,5,7]
-    numbers = [2,3,4,5,6,7,8,9]
+    primes = [1, 3, 5, 7]
+    numbers = [2, 3, 4, 5, 6, 7, 8, 9]
     condition = True
 
     if number in primes:
@@ -151,3 +164,92 @@ def determine_prime(number: int):
     else:
         return "Number is not prime!"
 
+
+def age_mean(ages: tuple):
+    sum = 0
+
+    for i in ages:
+        sum += i
+
+    mean = sum / len(ages)
+
+    if mean > 0 and mean <= 25:
+        return "Young class!!"
+    elif mean > 25 and mean <= 60:
+        return "Adult class!!"
+    else:
+        return "Old class"
+
+
+def mean_classes(classes: int, pupils: int):
+    if pupils > 40:
+        return "YOU CANT HAVE MORE THAN 40 PUPILS FOR CLASS"
+    return str((pupils * classes) / classes) + " PUPILS MEAN"
+
+
+def mean_cds(cds_amount: int, paid_value: float):
+    return str((cds_amount * paid_value) / cds_amount) + " CD'S MEAN"
+
+
+def one_ninety_nine_store():
+    value = 1.99
+    string = ""
+
+    for i in range(1, 51):
+        string += str(str(i) + " - R$ " + str(value * i) + "\n")
+
+    return "Almost Two Store - Price Table: \n" + string
+
+
+def beyond_ninety_nine():
+    sum_commodities = 0
+    condition = "S"
+
+    while condition == "S" or condition == "s":
+        print("Lojas Tabajara")
+        product = 0
+        while True:
+
+            product_price = float(input("Produto " + str(product) + ": R$ "))
+            sum_commodities += product_price
+            product += 1
+
+            if product_price == 0:
+                break
+
+        print("Total: " + str(sum_commodities))
+        money_amount = float(input("Money: "))
+        print("Money back: " + str(sum_commodities - money_amount))
+
+        condition = input("Type <S> if you want to continue using the software: ")
+
+
+def accidents(listy_of_tuples: list):
+    minor_index_of_accidents = listy_of_tuples[0]["number_of_accidents"]
+    major_index_of_accidents = listy_of_tuples[0]["number_of_accidents"]
+    sum_for_mean_of_vehicles = 0
+    city_major = ""
+    city_minor = ""
+
+    for i in listy_of_tuples:
+        for key,value in i.items():
+            if key == "code":
+                city = value
+            if key == "number_of_accidents" and value < minor_index_of_accidents:
+                minor_index_of_accidents = value
+                city_minor = city
+            if key == "number_of_accidents" and value > major_index_of_accidents:
+                major_index_of_accidents = value
+                city_major = city
+
+            if key == "number_of_cars":
+                sum_for_mean_of_vehicles += value
+
+    return "MAJOR NUMBER OF CARS ACCIDENTS: " + str(major_index_of_accidents) + ", CITY OF MAJOR OCCURANCE: " + city_major + "\n" + "MINOR NUMBER OF CAR ACCIDENTS: " \
+            "" + str(minor_index_of_accidents) + "\n" + "MEAN OF CARS IN FIVE CITIES: " + str(sum_for_mean_of_vehicles/5)
+
+print(accidents([{"code": "SP", "number_of_cars": 5000, "number_of_accidents": 1125},
+           {"code": "RJ", "number_of_cars": 3521, "number_of_accidents": 6212},
+           {"code": "CG", "number_of_cars": 5000, "number_of_accidents": 5632},
+           {"code": "VI", "number_of_cars": 9857, "number_of_accidents": 3698},
+           {"code": "BH", "number_of_cars": 6546, "number_of_accidents": 1524}, ]))

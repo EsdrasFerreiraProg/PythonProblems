@@ -452,8 +452,34 @@ def find_exclusive(a: list) -> list:
     else:
         return []
 
+def find_popularity(text: str, list: list) -> dict:
+    words = text.split("\n")
+    string = ""
 
-print(find_exclusive([7]))
+    for i in words:
+        string += i
+        string += " "
+
+    string = string.strip()
+    words = string.split(" ")
+
+    new_string = []
+    mydict = {}
+
+    for i in words:
+        new_string.append(i.lower())
+
+    for i in list:
+        mydict[i] = 0
+
+    for key, value in mydict.items():
+        for i in new_string:
+            if i == key:
+                mydict[key] += 1
+
+    return mydict
+
+
 
 
 

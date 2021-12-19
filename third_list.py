@@ -149,13 +149,13 @@ def major_minor_and_sum():
     return "Major = " + str(major) + "\n" + "Minor = " + str(minor) + "\n" + "SUM = " + str(sum)
 
 
-def determine_prime(number: int):
+def determine_prime(number: int) -> bool:
     primes = [1, 3, 5, 7]
     numbers = [2, 3, 4, 5, 6, 7, 8, 9]
     condition = True
 
     if number in primes:
-        return "It's prime!"
+        return True
 
     for i in numbers:
         if number % i == 0:
@@ -163,9 +163,9 @@ def determine_prime(number: int):
             break
 
     if condition == True:
-        return "It's prime dude!"
+        return True
     else:
-        return "Number is not prime!"
+        return False
 
 
 def age_mean(ages: tuple):
@@ -253,13 +253,14 @@ def accidents(listy_of_tuples: list):
                                                                                         "" + str(
         minor_index_of_accidents) + "\n" + "MEAN OF CARS IN FIVE CITIES: " + str(sum_for_mean_of_vehicles / 5)
 
+
 def minor_and_major_note(mydict: dict):
     minor = 10000
     major = 0
     minor_pupil_name = ""
     major_pupil_name = ""
 
-    for key,value in mydict.items():
+    for key, value in mydict.items():
         if value < minor:
             minor = value
             minor_pupil_name = key
@@ -267,7 +268,9 @@ def minor_and_major_note(mydict: dict):
             major = value
             major_pupil_name = key
 
-    return "GREATEST PUPIL NOTE AND NAME: " + str(major) + ", " + major_pupil_name + "\n" + "WORST PUPIL NOTE AND NAME: " + str(minor) + ", " + minor_pupil_name
+    return "GREATEST PUPIL NOTE AND NAME: " + str(
+        major) + ", " + major_pupil_name + "\n" + "WORST PUPIL NOTE AND NAME: " + str(minor) + ", " + minor_pupil_name
+
 
 def how_many_alumns(mydict):
     counter = 0
@@ -276,6 +279,7 @@ def how_many_alumns(mydict):
         counter += 1
     return counter
 
+
 def calculate_mean(mydict):
     counter = 0
     counter_of_how_many_values = 0
@@ -283,7 +287,8 @@ def calculate_mean(mydict):
         counter += value
         counter_of_how_many_values += 1
 
-    return "MEAN: " + str(counter/counter_of_how_many_values)
+    return "MEAN: " + str(counter / counter_of_how_many_values)
+
 
 def print_templates(questions_answered: tuple, correct_answers: tuple):
     import ast
@@ -328,4 +333,55 @@ def print_templates(questions_answered: tuple, correct_answers: tuple):
         file.write(str(mydict))
 
 
+def invert_integer(integer: int):
+    integer = str(integer)
+
+    return integer[::-1]
+
+
+def sum_serie(many_times: int):
+    counter = 0
+    string = ""
+    numerator = 1
+    denominator = 1
+    sum = 0
+
+    while counter != many_times:
+        string += str(numerator) + "/" + str(denominator)
+        string += " + "
+        numerator += 1
+        denominator += 2
+        counter += 1
+        sum += numerator / denominator
+
+    return string[0:-3] + "\n" + "SOMA: " + str(sum)
+
+
+def sum_serie2(many_times: int):
+    counter = 0
+    string = ""
+    numerator = 1
+    denominator = 1
+    sum = 0
+
+    while counter != many_times:
+        string += str(numerator) + "/" + str(denominator)
+        string += " + "
+
+        denominator += 1
+        counter += 1
+        sum += numerator / denominator
+
+    return string[0:-3] + "\n" + "SOMA: " + str(sum)
+
+
+def list_of_prime_numbers(stop: int):
+    my_list = list(range(1, stop + 1))
+    final_list = []
+
+    for i in my_list:
+        if determine_prime(i) == True:
+            final_list.append(i)
+
+    return final_list
 
